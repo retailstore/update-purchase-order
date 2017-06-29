@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+<style>
+	@media (max-width: 700px) {
+		.flex-container {
+			-webkit-flex-direction: column;
+			flex-direction: column;
+		}
+		
+		.flex-item {
+			margin: 0 auto;
+			width: 50%;
+		}
+	}
+	
+	@media (min-width: 699px) {
+		.flex-item {
+			width: 50%;
+		}
+	}
+</style>
+</head>
+<body>
+<form id="content">
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&lt;</a>
+		<center>
+			<div><input type="search" placeholder="Please enter Invoice#"></div>
+			<br>
+			<input id="rd1" type="radio" name="radio1" value="PGIN1006">PGIN1006<br><br>
+			<input id="rd2" type="radio" name="radio1" value="ULIN1504">ULIN1504<br><br>
+			<input id="rd3" type="radio" name="radio1" value="PGIN1404">PGIN1404<br><br>
+			<input id="rd4" type="radio" name="radio1" value="ITIN2903">ITIN2903<br><br>
+			<input id="rd5" type="radio" name="radio1" value="PGIN2803">PGIN2803<br><br>
+		</center>
+		<center>
+		<span><input type="button" value="Search" onclick="#" class="btn-5 btn-blue">
+		<input type="button" value="Check Status" onclick="getPOValue()" class="btn-5a"></span></center>
+	</div>
+
+	<div id="main">
+		<image src="../images/pglogo.png" id="logo"><br>
+		<label id="date">Date:- <label id="thetoday"></label></label>
+		<span style="font-size:30px;cursor:pointer" onclick="openNav()" id="open">&gt; </span>
+		<br><br>
+
+		<!--<div class="success-box" style="display:none;">
+			<a id="close" href="#" style="float: right;">[x]</a>
+			<center>
+				<br><br>
+				Updated successfully!! 
+				<br><br>
+		
+			</center>		
+		</div>-->
+		<div class="flex-container">
+			<div class="flex-item">
+				<span id="tag">Invoice#</span>
+				<input id="iv" type="text" onload="getPOValue()" class="value" disabled>
+				<br><br>
+				<span id="tag">PO#</label></span>
+				<input id="po" class="value" type="text" onload="getPOValue()" disabled>
+			</div>
+			<div class="flex-item">
+				<span id="tag">Lot#</label></span>
+				<span><select id="selectLot" class="dropdown" name="lot" onchange="statusPO()">
+					<option>Select</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				</select></span>
+			</div>
+		</div>
+		<br>
+		<div style="width: 50%">	
+			<span id="tag">Status Update</label></span>
+			<span><input type="text" class="text-area"></span>
+		</div>
+		<br><br><br>
+		<div><center>
+			<input id="Update" type="button" value="Update" class="btn-1 btn-blue">
+			<input type="button" onclick="back()" value="Back" class="btn-1 btn-blue">
+		</center></div>
+	</div>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../js/script.js"></script>
+<script>
+
+	
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+	document.getElementById("open").style.visibility = "hidden";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+	document.getElementById("open").style.visibility = "visible";
+
+}
+function getPOValue(){
+	if(document.getElementById("rd1").checked)
+	{
+		document.getElementById("iv").value=document.getElementById("rd1").value;
+		document.getElementById("po").value="PGPO2605";
+	}
+	if(document.getElementById("rd2").checked)
+	{
+		document.getElementById("iv").value=document.getElementById("rd2").value;
+		document.getElementById("po").value="HULPO1504";
+	}
+	if(document.getElementById("rd3").checked)
+	{
+		document.getElementById("iv").value=document.getElementById("rd3").value;
+		document.getElementById("po").value="PGPO1404";
+	}
+	if(document.getElementById("rd4").checked)
+	{
+		document.getElementById("iv").value=document.getElementById("rd4").value;
+		document.getElementById("po").value="ITPO2903";
+	}
+	if(document.getElementById("rd5").checked)
+	{
+		document.getElementById("iv").value=document.getElementById("rd5").value;
+		document.getElementById("po").value="PGPO2803";
+	}
+}
+
+function statusPO(){
+	document.getElementById("lot").innerHTML=document.getElementById("selectLot").value;
+	document.getElementById("po1").innerHTML=document.getElementById("po").value;
+	document.getElementById("displayDiv").style.display="block";
+}
+
+function back () {
+	window.location.href = "B_Welcome.html"
+}
+
+$("#Update").click(function() {
+	$(".success-box").toggle();
+});
+
+$("#close").click(function() {
+	$(".success-box").hide();
+});
+</script>
+     
+</body>
+</html> 
